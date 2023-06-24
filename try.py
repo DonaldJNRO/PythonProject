@@ -5,8 +5,7 @@ import matplotlib.pyplot as plt
 
 csv_file = ('bus-timetable.csv')
 
-infile = urllib.request.urlopen('https://api.tfl.gov.uk/StopPoint/490008645U/arrivals')
-
+infile = urllib.request.urlopen('https://api.tfl.gov.uk/StopPoint/490000112P/arrivals')
 
 class ArrivalTimes:
     def __init__(self, csv_file):
@@ -25,8 +24,6 @@ class ArrivalTimes:
                 writer.writerow(arrival.values())
         print("File saved successfully.")
 
-
-
     def display_arrival_stats(self):
         destinations = [arrival["destinationName"] for arrival in self.arrival_times]
         destination_counts = {destination: destinations.count(destination) for destination in set(destinations)}
@@ -36,7 +33,6 @@ class ArrivalTimes:
         with open(self._csv_file, 'r') as csv_file:
             reader = csv.reader(csv_file)
             next(reader)
-
 
         plt.bar(destinations, counts)
         plt.xlabel("Destination")
